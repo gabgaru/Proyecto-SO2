@@ -125,8 +125,8 @@ public class SO {
         }//Saca elemento de la lista 1
 
         if (Fighter1 == null && Fighter2 == null) {
-            System.out.println("No hay mas procesos, fin del programa.");
-            System.out.println(this.StarTrekQueue1.size()+","+this.StarTrekQueue2.size()+","+this.StarTrekQueue3.size()+","+this.StarTrekTrainingQueue.size()+","+this.StarWarsQueue1.size()+","+this.StarWarsQueue2.size()+","+this.StarWarsQueue3.size()+","+this.StarWarsTrainingQueue.size());
+            //System.out.println("No hay mas procesos, fin del programa.");
+            //System.out.println(this.StarTrekQueue1.size()+","+this.StarTrekQueue2.size()+","+this.StarTrekQueue3.size()+","+this.StarTrekTrainingQueue.size()+","+this.StarWarsQueue1.size()+","+this.StarWarsQueue2.size()+","+this.StarWarsQueue3.size()+","+this.StarWarsTrainingQueue.size());
             System.out.println("\nGanadores\n");
             for (int i=0;i<=this.CPUPointer.getWinners().size();i++){
                 Characters Actual=this.CPUPointer.getWinners().poll();
@@ -134,7 +134,6 @@ public class SO {
                 if (Actual.getSaga()){saga="Star Wars";}else{saga="Star Trek";}
                 System.out.println("Peleador #"+Actual.getID()+" Nombre: "+Actual.getNombre()+" Saga: "+saga);
             }
-            System.out.println(this.CPUPointer.getWinners());
         } else {
             this.CPUPointer.SelectConditions(Fighter1, Fighter2);
         }
