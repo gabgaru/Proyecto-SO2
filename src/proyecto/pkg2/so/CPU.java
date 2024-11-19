@@ -5,6 +5,8 @@
 package proyecto.pkg2.so;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 /**
  *
@@ -26,12 +28,13 @@ public class CPU {
         return Winners;
     }
     
-    public void SelectConditions(Characters Fighter1, Characters Fighter2) {
+    public void SelectConditions(Characters Fighter1, Characters Fighter2) throws InterruptedException{
         Random rand = new Random();
         int prob = rand.nextInt(101);
 //        System.out.println(prob);
 //        System.out.println(Fighter1);
 //        System.out.println(Fighter2);
+        Thread.sleep(500);
         if (Fighter1 != null && Fighter2 != null) {
             if (27 < prob && prob <= 67) {
                 //Ejecutar selector de ganador
@@ -45,7 +48,8 @@ public class CPU {
                 Fighter1.setPriority(1);
                 Fighter2.setPriority(1);
                 //System.out.println("Empate");
-                this.SOPointer.add2toQueue(Fighter1, Fighter2);
+                this.SOPointer.add1toQueue(Fighter1);
+                this.SOPointer.add1toQueue(Fighter2);
                 //System.out.println("Empate"+"\n");
                 this.SOPointer.StartRound();
             }
@@ -56,7 +60,8 @@ public class CPU {
                 Fighter1.setPriority(4);
                 Fighter2.setPriority(4);
                 //System.out.println("No estan listos");
-                this.SOPointer.add2toQueue(Fighter1, Fighter2);
+                this.SOPointer.add1toQueue(Fighter1);
+                this.SOPointer.add1toQueue(Fighter2);
                 this.SOPointer.StartRound();
             }
         }else{
@@ -110,8 +115,12 @@ public class CPU {
 //                System.out.println("Ha ganado el combatiente 1 (ID: "+R1.getID()+")");
             }
         }
-//        this.SOPointer.updatePcounter();
-        this.SOPointer.StartRound();
+        try {
+            //        this.SOPointer.updatePcounter();
+            this.SOPointer.StartRound();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CPU.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void SelectWinner(Characters Fighter1, Characters Fighter2){

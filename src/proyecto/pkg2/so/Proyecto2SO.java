@@ -17,7 +17,7 @@ public class Proyecto2SO {
     public static void main(String[] args) throws InterruptedException {
         //True StarWars
         //False StarTrek
-         MainUI main = new MainUI();
+        MainUI main = new MainUI();
         main.setVisible(true);
         SO TestSO= new SO();
         CPU TestCPU=new CPU(TestSO);

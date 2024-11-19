@@ -56,10 +56,11 @@ public class SO {
             Characters Actual2=this.StarWarsTrainingQueue.removeFirst();
             Actual1.setPriority(1);
             Actual2.setPriority(1);
-            this.add2toQueue(Actual1, Actual2);
+            this.add1toQueue(Actual1);
+            this.add1toQueue(Actual2);
         }
     }
-    public void StartRound() {
+    public void StartRound() throws InterruptedException {
         Characters Fighter1 = null;
         Characters Fighter2 = null;
         //Agregar nuevos jugadores para este ciclo
@@ -138,9 +139,14 @@ public class SO {
             }
         } else {
             //1 start wars 2 star trek
-            
-            this.main.setNanmeStarWars( Fighter1);
-            this.main.setNanmeStarTrek(Fighter2);
+            if((Fighter1.getSaga()&&Fighter2.getSaga())||(Fighter1.getSaga()==false&&Fighter2.getSaga()==false)){System.out.println("ERROR, NO PUEDEN SER DE LO MISMOOO");}
+            if(Fighter1.getSaga()){
+                this.main.setNanmeStarWars(Fighter1);
+                this.main.setNanmeStarTrek(Fighter2);
+            }else{
+                this.main.setNanmeStarTrek(Fighter1);
+                this.main.setNanmeStarWars(Fighter2);
+            }
             this.CPUPointer.SelectConditions(Fighter1, Fighter2);
         }
     }
@@ -187,7 +193,7 @@ public class SO {
 
     public void add1toQueue(Characters C1) {
         int Queue = C1.getPriority();
-        if (C1.getSaga()) {
+        if (C1.getSaga()==true) {
           
             switch (Queue) {
                 case 1:
@@ -233,27 +239,7 @@ public class SO {
         System.out.println("Tamano de ST: " + this.StarTrekQueue1.size());
     }
 
-    public void add2toQueue(Characters C1, Characters C2) {
-        int Queue = C1.getPriority();
-        switch (Queue) {
-            case 1:
-                this.StarTrekQueue1.add(C2);
-                this.StarWarsQueue1.add(C1);
-                break;
-            case 2:
-                this.StarTrekQueue2.add(C2);
-                this.StarWarsQueue2.add(C1);
-                break;
-            case 3:
-                this.StarTrekQueue3.add(C2);
-                this.StarWarsQueue3.add(C1);
-                break;
-            case 4:
-                this.StarTrekTrainingQueue.add(C2);
-                this.StarWarsTrainingQueue.add(C1);
-                break;
-        }
-    }
+   
 
     public Characters peek(int Queue, Boolean Saga) {
         switch (Queue) {
