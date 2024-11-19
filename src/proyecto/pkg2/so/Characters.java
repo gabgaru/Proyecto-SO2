@@ -22,15 +22,16 @@ public class Characters {
     private int Special;
     private int Priority;
     private int clock;
+    
     private Random rand = new Random();
     private String Nombre;
     private String[] StarWarsCharacters = 
-        {"Luke Skywalker", "Darth Vader", "Han Solo", "Princess Leia", "Yoda", "Obi-Wan Kenobi", "Anakin Skywalker", 
-        "Padmé Amidala", "Chewbacca", "R2-D2", "C-3PO", "Lando Calrissian", "Boba Fett","Qui-Gon Jinn", "Mace Windu", 
-        "Rey Skywalker", "Kylo Ren", "Finn", "Poe Dameron", "Jabba the Hutt"};
+        {"Luke-Skywalker", "Darth-Vader", "Han-Solo", "Princess-Leia", "Yoda", "Obi-Wan-Kenobi", "Anakin-Skywalker", 
+        "Padmé-Amidala", "Chewbacca", "R2-D2", "C-3PO", "Lando-Calrissian", "Boba-Fett","Qui-Gon-Jinn", "Mace-Windu", 
+        "Palpatine", "Kylo-Ren", "Finn", "Poe-Dameron", "Jabba-the-Hutt"};
     private String[] StarTrekCharacters=
-        { "James T. Kirk", "Spock", "Leonard McCoy", "Montgomery Scott", "Nyota Uhura", "Hikaru Sulu", 
-        "Pavel Chekov", "Jean-Luc Picard", "William Riker", "Data", "Worf", "Beverly Crusher", "Deanna Troi", "Geordi La Forge", "Benjamin Sisko", "Kathryn Janeway", "Seven of Nine", "T'Pol", "Jonathan Archer", "Quark" };
+        { "James-T.Kirk", "Spock", "Leonard-McCoy", "Montgomery-Scott", "Nyota-Uhura", "Hikaru-Sulu", 
+        "Pavel-Chekov", "Jean-Luc-Picard", "William-Riker", "Data", "Worf", "Beverly-Crusher", "Deanna-Troi", "Geordi-La-Forge", "Benjamin-Sisko", "Kathryn-Janeway", "Seven-of-Nine", "T'Pol", "Jonathan-Archer", "Quark" };
 
     public Characters(int id, Boolean saga) {
         int special = 0;

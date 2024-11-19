@@ -6,6 +6,7 @@ package proyecto.pkg2.so;
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JFrame;
 
 /**
  *
@@ -28,6 +29,7 @@ public class SO {
     private int STint;
     private int SWint;
     private int prob;
+    private MainUI main;
 
     public SO() {
         Random rand = new Random();
@@ -135,6 +137,10 @@ public class SO {
                 System.out.println("Peleador #"+Actual.getID()+" Nombre: "+Actual.getNombre()+" Saga: "+saga);
             }
         } else {
+            //1 start wars 2 star trek
+            
+            this.main.setNanmeStarWars( Fighter1);
+            this.main.setNanmeStarTrek(Fighter2);
             this.CPUPointer.SelectConditions(Fighter1, Fighter2);
         }
     }
@@ -171,9 +177,18 @@ public class SO {
         }
     }
 
+    public MainUI getMain() {
+        return main;
+    }
+
+    public void setMain( MainUI main) {
+        this.main = main;
+    }
+
     public void add1toQueue(Characters C1) {
         int Queue = C1.getPriority();
         if (C1.getSaga()) {
+          
             switch (Queue) {
                 case 1:
                     this.StarWarsQueue1.add(C1);
@@ -190,7 +205,9 @@ public class SO {
                     break;
             }
         } else {
+
             switch (Queue) {
+                
                 case 1:
                     this.StarTrekQueue1.add(C1);
                     break;

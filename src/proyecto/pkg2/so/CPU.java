@@ -5,6 +5,7 @@
 package proyecto.pkg2.so;
 import java.util.LinkedList;
 import java.util.Random;
+import javax.swing.JFrame;
 /**
  *
  * @author gabgaru
@@ -13,6 +14,7 @@ public class CPU {
     private LinkedList<Characters> Winners;
     private SO SOPointer;
     private Boolean HaveaWinner;
+    MainUI main;
     
     public CPU(SO Pointer){
         this.Winners= new LinkedList();
@@ -63,6 +65,14 @@ public class CPU {
             System.out.println(Fighter2);
         }
     }
+
+    public MainUI getMain() {
+        return main;
+    }
+
+    public void setMain(MainUI main) {
+        this.main = main;
+    }
     
     //Esta mal hecho hay q arreglarlo
     private void SelectWinner2(Characters C1, Characters C2){
@@ -85,7 +95,9 @@ public class CPU {
 //                System.out.println("El combatiente 1 ataca!, Damage: ");
                 R2.setHealth(R2.getHealth()-R1.getStrength());
             }else{
+                main.setStarTrek();
                 this.Winners.add(R2);
+                
 //                System.out.println("Ha ganado el combatiente 2 (ID: "+R2.getID()+")");
             }
             //El segundo ataca si no murio
@@ -93,6 +105,7 @@ public class CPU {
 //                System.out.println("El combatiente 2 ataca!");
                 R1.setHealth(R1.getHealth()-(R2.getStrength()*(R2.getSkills()/100)-AgilityDiff));
             }else{
+                main.setStarWars();
                 this.Winners.add(R1);
 //                System.out.println("Ha ganado el combatiente 1 (ID: "+R1.getID()+")");
             }
