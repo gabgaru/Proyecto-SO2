@@ -63,11 +63,12 @@ public class SO {
     }
 
     public void StartRound() throws InterruptedException {
-        this.CPUPointer.setStatus("Esperando");
+        this.CPUPointer.setStatus("Eligiendo");
         this.main.changeAIStatus(this.CPUPointer.getStatus());
-        //Thread.sleep(5000 / 3);
+        //this.SOPointer.waitbro(numero desde la UI);
         Characters Fighter1 = null;
         Characters Fighter2 = null;
+        
         //Agregar nuevos jugadores para este ciclo
         if (this.Counter <= 0 && prob <= 80) {
             this.add1toQueue(new Characters(this.SWint + 1, true));
@@ -166,7 +167,11 @@ public class SO {
     public void SetCPUPointer(CPU pointer) {
         this.CPUPointer = pointer;
     }
-
+    
+    public void waitbro(int x) throws InterruptedException{
+        Thread.sleep(x);
+    }
+    
     public void updatePcounter() {
         for (int i = 0; i <= this.StarTrekQueue1.size(); i++) {
             Characters Actual = this.StarTrekQueue1.get(i);

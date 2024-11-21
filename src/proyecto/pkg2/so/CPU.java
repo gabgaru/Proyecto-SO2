@@ -37,7 +37,7 @@ public class CPU {
 //        System.out.println(prob);
 //        System.out.println(Fighter1);
 //        System.out.println(Fighter2);
-        setStatus("Decidiedo");
+        setStatus("Decidiendo Resultado");
         this.main.changeAIStatus(getStatus());
         if (Fighter1.getSaga()) {
             this.main.setNanmeStarWars(Fighter1);
@@ -46,7 +46,7 @@ public class CPU {
             this.main.setNanmeStarTrek(Fighter1);
             this.main.setNanmeStarWars(Fighter2);
         }
-        //Thread.sleep(5000 / 3);
+        //this.SOPointer.waitbro(numero desde la UI);
         if (Fighter1 != null && Fighter2 != null) {
             if (27 < prob && prob <= 67) {
                 //Ejecutar selector de ganador
