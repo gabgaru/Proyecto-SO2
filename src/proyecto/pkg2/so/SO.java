@@ -47,19 +47,21 @@ public class SO {
         this.Counter = 2;
         this.STint = 20;
         this.SWint = 20;
-        this.prob=rand.nextInt(101);
+        this.prob = rand.nextInt(101);
     }
-    private void prueba(){
+
+    private void prueba() {
         //Revisar si sale o no un personaje de la cola de entrenamiento
-        if (prob<=40&&this.StarTrekTrainingQueue.isEmpty()==false&&this.StarWarsTrainingQueue.isEmpty()==false){
-            Characters Actual1=this.StarTrekTrainingQueue.removeFirst();
-            Characters Actual2=this.StarWarsTrainingQueue.removeFirst();
+        if (prob <= 40 && this.StarTrekTrainingQueue.isEmpty() == false && this.StarWarsTrainingQueue.isEmpty() == false) {
+            Characters Actual1 = this.StarTrekTrainingQueue.removeFirst();
+            Characters Actual2 = this.StarWarsTrainingQueue.removeFirst();
             Actual1.setPriority(1);
             Actual2.setPriority(1);
             this.add1toQueue(Actual1);
             this.add1toQueue(Actual2);
         }
     }
+
     public void StartRound() throws InterruptedException {
         Characters Fighter1 = null;
         Characters Fighter2 = null;
@@ -131,22 +133,29 @@ public class SO {
             //System.out.println("No hay mas procesos, fin del programa.");
             //System.out.println(this.StarTrekQueue1.size()+","+this.StarTrekQueue2.size()+","+this.StarTrekQueue3.size()+","+this.StarTrekTrainingQueue.size()+","+this.StarWarsQueue1.size()+","+this.StarWarsQueue2.size()+","+this.StarWarsQueue3.size()+","+this.StarWarsTrainingQueue.size());
             System.out.println("\nGanadores\n");
-            for (int i=0;i<=this.CPUPointer.getWinners().size();i++){
-                Characters Actual=this.CPUPointer.getWinners().poll();
+            for (int i = 0; i <= this.CPUPointer.getWinners().size(); i++) {
+                Characters Actual = this.CPUPointer.getWinners().poll();
                 String saga;
-                if (Actual.getSaga()){saga="Star Wars";}else{saga="Star Trek";}
-                System.out.println("Peleador #"+Actual.getID()+" Nombre: "+Actual.getNombre()+" Saga: "+saga);
+                if (Actual.getSaga()) {
+                    saga = "Star Wars";
+                } else {
+                    saga = "Star Trek";
+                }
+                System.out.println("Peleador #" + Actual.getID() + " Nombre: " + Actual.getNombre() + " Saga: " + saga);
             }
         } else {
             //1 start wars 2 star trek
-            if((Fighter1.getSaga()&&Fighter2.getSaga())||(Fighter1.getSaga()==false&&Fighter2.getSaga()==false)){System.out.println("ERROR, NO PUEDEN SER DE LO MISMOOO");}
-            if(Fighter1.getSaga()){
-                this.main.setNanmeStarWars(Fighter1);
-                this.main.setNanmeStarTrek(Fighter2);
-            }else{
-                this.main.setNanmeStarTrek(Fighter1);
-                this.main.setNanmeStarWars(Fighter2);
+            this.main.setSecondQueue(0, StarWarsQueue2);
+            this.main.setTopQueue(0, StarWarsQueue1);
+            this.main.setThirdQueue(0, StarWarsQueue3);
+            this.main.setSecondQueue(1, StarTrekQueue2);
+            this.main.setTopQueue(1, StarTrekQueue1);
+            this.main.setThirdQueue(1, StarTrekQueue3);
+            
+            if ((Fighter1.getSaga() && Fighter2.getSaga()) || (Fighter1.getSaga() == false && Fighter2.getSaga() == false)) {
+                System.out.println("ERROR, NO PUEDEN SER DE LO MISMOOO");
             }
+            
             this.CPUPointer.SelectConditions(Fighter1, Fighter2);
         }
     }
@@ -187,14 +196,14 @@ public class SO {
         return main;
     }
 
-    public void setMain( MainUI main) {
+    public void setMain(MainUI main) {
         this.main = main;
     }
 
     public void add1toQueue(Characters C1) {
         int Queue = C1.getPriority();
-        if (C1.getSaga()==true) {
-          
+        if (C1.getSaga() == true) {
+
             switch (Queue) {
                 case 1:
                     this.StarWarsQueue1.add(C1);
@@ -213,7 +222,7 @@ public class SO {
         } else {
 
             switch (Queue) {
-                
+
                 case 1:
                     this.StarTrekQueue1.add(C1);
                     break;
@@ -238,8 +247,6 @@ public class SO {
         System.out.println("Tamano de SW: " + this.StarWarsQueue1.size());
         System.out.println("Tamano de ST: " + this.StarTrekQueue1.size());
     }
-
-   
 
     public Characters peek(int Queue, Boolean Saga) {
         switch (Queue) {
