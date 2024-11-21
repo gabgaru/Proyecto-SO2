@@ -65,7 +65,7 @@ public class SO {
     public void StartRound() throws InterruptedException {
         this.CPUPointer.setStatus("Esperando");
         this.main.changeAIStatus(this.CPUPointer.getStatus());
-        Thread.sleep(5000 / 3);
+        //Thread.sleep(5000 / 3);
         Characters Fighter1 = null;
         Characters Fighter2 = null;
         //Agregar nuevos jugadores para este ciclo
