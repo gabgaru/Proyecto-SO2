@@ -63,6 +63,9 @@ public class SO {
     }
 
     public void StartRound() throws InterruptedException {
+        this.CPUPointer.setStatus("Esperando");
+        this.main.changeAIStatus(this.CPUPointer.getStatus());
+        Thread.sleep(5000 / 3);
         Characters Fighter1 = null;
         Characters Fighter2 = null;
         //Agregar nuevos jugadores para este ciclo
@@ -151,11 +154,11 @@ public class SO {
             this.main.setSecondQueue(1, StarTrekQueue2);
             this.main.setTopQueue(1, StarTrekQueue1);
             this.main.setThirdQueue(1, StarTrekQueue3);
-            
+
             if ((Fighter1.getSaga() && Fighter2.getSaga()) || (Fighter1.getSaga() == false && Fighter2.getSaga() == false)) {
                 System.out.println("ERROR, NO PUEDEN SER DE LO MISMOOO");
             }
-            
+
             this.CPUPointer.SelectConditions(Fighter1, Fighter2);
         }
     }

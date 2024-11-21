@@ -19,6 +19,7 @@ public class CPU {
     private SO SOPointer;
     private Boolean HaveaWinner;
     MainUI main;
+    String status = "";
 
     public CPU(SO Pointer) {
         this.Winners = new LinkedList();
@@ -37,7 +38,6 @@ public class CPU {
 //        System.out.println(Fighter1);
 //        System.out.println(Fighter2);
 
-        Thread.sleep(1000);
         if (Fighter1.getSaga()) {
             this.main.setNanmeStarWars(Fighter1);
             this.main.setNanmeStarTrek(Fighter2);
@@ -49,7 +49,13 @@ public class CPU {
             if (27 < prob && prob <= 67) {
                 //Ejecutar selector de ganador
                 //System.out.println("Combate");
+
+                setStatus("Decidiedo");
+                this.main.changeAIStatus(getStatus());
+                Thread.sleep(5000 / 3);
+
                 this.SelectWinner2(Fighter1, Fighter2);
+
                 //System.out.println("Combate"+"\n");
             }
             if (prob <= 27) {
@@ -91,6 +97,8 @@ public class CPU {
 
     //Esta mal hecho hay q arreglarlo
     private void SelectWinner2(Characters C1, Characters C2) {
+
+        this.main.changeAIStatus(getStatus());
         int AgilityDiff = 0;
         Characters R1 = null;
         Characters R2 = null;
@@ -145,11 +153,23 @@ public class CPU {
         System.out.println("salio");
         try {
             //        this.SOPointer.updatePcounter();
+
+            setStatus("Anunciando");
+            this.main.changeAIStatus(getStatus());
+            Thread.sleep(5000 / 3);
             this.SOPointer.StartRound();
         } catch (InterruptedException ex) {
             Logger.getLogger(CPU.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     private void SelectWinner(Characters Fighter1, Characters Fighter2) {
