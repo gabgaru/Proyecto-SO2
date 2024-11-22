@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class MainUI extends javax.swing.JFrame {
 
@@ -19,126 +20,160 @@ public class MainUI extends javax.swing.JFrame {
         super("ToonWars");
         initComponents();
         setLocationRelativeTo(null);
-
-
+        SpinnerNumberModel modelo = new SpinnerNumberModel(5, 5, 20, 1);
+        speed.setModel(modelo);
 
     }
 
-   public void setPhotoStarWars(String resourcePath) {
-    try {
-        URL resource = getClass().getResource("/StarwarsFotos"+"/"+resourcePath+".jpeg");
-        if (resource != null) {
-            ImageIcon icon = new ImageIcon(resource);
+    public void setPhotoStarWars(String resourcePath) {
+        try {
+            URL resource = getClass().getResource("/StarwarsFotos" + "/" + resourcePath + ".jpeg");
+            if (resource != null) {
+                ImageIcon icon = new ImageIcon(resource);
 
-            // Ajustar tamaño de la imagen
-            Image img = icon.getImage();
-            Image resizedImg = img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
-            icon = new ImageIcon(resizedImg);
+                // Ajustar tamaño de la imagen
+                Image img = icon.getImage();
+                Image resizedImg = img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                icon = new ImageIcon(resizedImg);
 
-            // Configurar la imagen en jLabel1
-            jLabel1.setIcon(icon);
-        } else {
-            System.err.println("No se encontró el recurso: " + resourcePath);
+                // Configurar la imagen en jLabel1
+                jLabel1.setIcon(icon);
+            } else {
+                System.err.println("No se encontró el recurso: " + resourcePath);
+            }
+        } catch (Exception e) {
+            System.err.println("Error cargando la imagen: " + e.getMessage());
         }
-    } catch (Exception e) {
-        System.err.println("Error cargando la imagen: " + e.getMessage());
     }
-}
 
- public void setPhotoStarTrek(String resourcePath) {
-    try {
-           URL resource = getClass().getResource("/StarTrekFotos"+"/"+resourcePath+".jpg");
-      
-        if (resource != null) {
-            ImageIcon icon = new ImageIcon(resource);
+    public void setResult(String name) {
+        result.setText(name);
+    }
 
-            // Ajustar tamaño de la imagen
-            Image img = icon.getImage();
-            Image resizedImg = img.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
-            icon = new ImageIcon(resizedImg);
+    public int getSpeed() {
+        return (int) speed.getValue();
+    }
 
-            // Configurar la imagen en jLabel1
-            jLabel2.setIcon(icon);
-        } else {
-            System.err.println("No se encontró el recurso: " + resourcePath);
+    public void setPhotoStarTrek(String resourcePath) {
+        try {
+            URL resource = getClass().getResource("/StarTrekFotos" + "/" + resourcePath + ".jpg");
+
+            if (resource != null) {
+                ImageIcon icon = new ImageIcon(resource);
+
+                // Ajustar tamaño de la imagen
+                Image img = icon.getImage();
+                Image resizedImg = img.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+                icon = new ImageIcon(resizedImg);
+
+                // Configurar la imagen en jLabel1
+                jLabel2.setIcon(icon);
+            } else {
+                System.err.println("No se encontró el recurso: " + resourcePath);
+            }
+        } catch (Exception e) {
+            System.err.println("Error cargando la imagen: " + e.getMessage());
         }
-    } catch (Exception e) {
-        System.err.println("Error cargando la imagen: " + e.getMessage());
     }
-}
-
 
     public void setSecondQueue(int n, ArrayList<Characters> a) {
-    StringBuilder concatenatedElements = new StringBuilder();
+        StringBuilder concatenatedElements = new StringBuilder();
 
-    for (Characters element : a) {
-        concatenatedElements.append(element.getNombre()).append("\n");
-    }
+        for (Characters element : a) {
+            concatenatedElements.append(element.getNombre()).append("\n");
+        }
 
-    String concatenatedString = concatenatedElements.toString();
+        String concatenatedString = concatenatedElements.toString();
 
-    // Seleccionar el TextView basado en studioInt
-    switch (n) {
-        case 0 -> secondQueueWars.setText(concatenatedString);
-        case 1 -> secondQueueTrek.setText(concatenatedString);
-        default -> {
-            // Opcional: manejar el caso de entrada no válida
-            System.out.println("Invalid studioInt");
+        // Seleccionar el TextView basado en studioInt
+        switch (n) {
+            case 0 ->
+                secondQueueWars.setText(concatenatedString);
+            case 1 ->
+                secondQueueTrek.setText(concatenatedString);
+            default -> {
+                // Opcional: manejar el caso de entrada no válida
+                System.out.println("Invalid studioInt");
+            }
         }
     }
-} 
-   
-public void setThirdQueue(int n, ArrayList<Characters> a) {
-    StringBuilder concatenatedElements = new StringBuilder();
 
-    for (Characters element : a) {
-        concatenatedElements.append(element.getNombre()).append("\n");
-    }
+    public void setThirdQueue(int n, ArrayList<Characters> a) {
+        StringBuilder concatenatedElements = new StringBuilder();
 
-    String concatenatedString = concatenatedElements.toString();
+        for (Characters element : a) {
+            concatenatedElements.append(element.getNombre()).append("\n");
+        }
 
-    // Seleccionar el TextView basado en studioInt
-    switch (n) {
-        case 0 -> thirdQueueWars.setText(concatenatedString);
-        case 1 -> thirdQueueTrek.setText(concatenatedString);
-        default -> {
-            // Opcional: manejar el caso de entrada no válida
-            System.out.println("Invalid studioInt");
+        String concatenatedString = concatenatedElements.toString();
+
+        // Seleccionar el TextView basado en studioInt
+        switch (n) {
+            case 0 ->
+                thirdQueueWars.setText(concatenatedString);
+            case 1 ->
+                thirdQueueTrek.setText(concatenatedString);
+            default -> {
+                // Opcional: manejar el caso de entrada no válida
+                System.out.println("Invalid studioInt");
+            }
         }
     }
-} 
-   
-public void setTopQueue(int n, ArrayList<Characters> a) {
-    StringBuilder concatenatedElements = new StringBuilder();
+    public void setFourQueue(int n, ArrayList<Characters> a) {
+        StringBuilder concatenatedElements = new StringBuilder();
 
-    for (Characters element : a) {
-        concatenatedElements.append(element.getNombre()).append("\n");
-    }
+        for (Characters element : a) {
+            concatenatedElements.append(element.getNombre()).append("\n");
+        }
 
-    String concatenatedString = concatenatedElements.toString();
+        String concatenatedString = concatenatedElements.toString();
 
-    // Seleccionar el TextView basado en studioInt
-    switch (n) {
-        case 0 -> topQueueWars.setText(concatenatedString);
-        case 1 -> topQueueTrek.setText(concatenatedString);
-        default -> {
-            // Opcional: manejar el caso de entrada no válida
-            System.out.println("Invalid studioInt");
+        // Seleccionar el TextView basado en studioInt
+        switch (n) {
+            case 0 ->
+                fourQueueWars.setText(concatenatedString);
+            case 1 ->
+                fourQueueTrek.setText(concatenatedString);
+            default -> {
+                // Opcional: manejar el caso de entrada no válida
+                System.out.println("Invalid studioInt");
+            }
         }
     }
-}
+    public void setTopQueue(int n, ArrayList<Characters> a) {
+        StringBuilder concatenatedElements = new StringBuilder();
+
+        for (Characters element : a) {
+            concatenatedElements.append(element.getNombre()).append("\n");
+        }
+
+        String concatenatedString = concatenatedElements.toString();
+
+        // Seleccionar el TextView basado en studioInt
+        switch (n) {
+            case 0 ->
+                topQueueWars.setText(concatenatedString);
+            case 1 ->
+                topQueueTrek.setText(concatenatedString);
+            default -> {
+                // Opcional: manejar el caso de entrada no válida
+                System.out.println("Invalid studioInt");
+            }
+        }
+    }
+
     public void setNanmeStarWars(Characters name) {
 
-        characterIDStarWars.setText("#"+name.getID()+" "+name.getNombre());
+        characterIDStarWars.setText("#" + name.getID() + " " + name.getNombre());
         this.chracterHPWars.setText(String.valueOf(name.getHealth()));
         this.chracterSTWars.setText(String.valueOf(name.getStrength()));
         this.chracterAGWars.setText(String.valueOf(name.getAgility()));
         setPhotoStarWars(name.getNombre());
-        
+
     }
 
     public void setNanmeStarTrek(Characters name) {
-        characterIDStarTrek.setText("#"+name.getID()+" "+name.getNombre());
+        characterIDStarTrek.setText("#" + name.getID() + " " + name.getNombre());
         this.chracterHPTrek.setText(String.valueOf(name.getHealth()));
         this.chracterSTTrek.setText(String.valueOf(name.getStrength()));
         this.chracterAGTrek.setText(String.valueOf(name.getAgility()));
@@ -149,24 +184,14 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
         statusAI.setText(status);
     }
 
-    public void setCartoonWinner() {
-        this.cartoonWinner.setText("Winner!");
-    }
-
-    public void setNickWinner() {
-        this.nickWinner.setText("Winner!");
-    }
-
-    public void clearCartoonWinner() {
-        this.cartoonWinner.setText("");
-    }
-
-    public void clearNickWinner() {
-        this.nickWinner.setText("");
-    }
-
     public void changeResult(String result) {
         this.result.setText(result);
+    }
+
+    public void setRound() {
+        int x = Integer.parseInt(round.getText());
+        x++;
+        round.setText(String.valueOf(x));
     }
 
     public void setStarWars() {
@@ -227,7 +252,7 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
         topQueueTrek = new javax.swing.JTextArea();
         topQueueCartoon_label = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        thirdQueueTrek = new javax.swing.JTextArea();
+        fourQueueTrek = new javax.swing.JTextArea();
         thirdQueueCartoon_label = new javax.swing.JLabel();
         winsCartoon_label = new javax.swing.JLabel();
         winsCounterStarTrek = new javax.swing.JLabel();
@@ -236,6 +261,9 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
         speed = new javax.swing.JSpinner();
         speed_Label = new javax.swing.JLabel();
         result = new javax.swing.JLabel();
+        thirdQueueCartoon_label1 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        thirdQueueTrek = new javax.swing.JTextArea();
         nickelodeonPanel = new javax.swing.JPanel();
         secondQueueNick_label = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -257,15 +285,18 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
         secondQueueWars = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         topQueueWars = new javax.swing.JTextArea();
-        thirdQueueNick_label = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        thirdQueueWars = new javax.swing.JTextArea();
         winsNick_label = new javax.swing.JLabel();
         winsCounterStarWars = new javax.swing.JLabel();
         result_label = new javax.swing.JLabel();
         round_label = new javax.swing.JLabel();
         statusAI = new javax.swing.JLabel();
         AI_label = new javax.swing.JLabel();
+        thirdQueueNick_label1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        thirdQueueWars = new javax.swing.JTextArea();
+        thirdQueueNick_label2 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        fourQueueWars = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -382,19 +413,19 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
         topQueueCartoon_label.setText("Top Prioridad ");
         cartoonNetworkPanel.add(topQueueCartoon_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 110, 30));
 
-        thirdQueueTrek.setBackground(new java.awt.Color(255, 255, 255));
-        thirdQueueTrek.setColumns(20);
-        thirdQueueTrek.setRows(5);
-        thirdQueueTrek.setBorder(null);
-        jScrollPane7.setViewportView(thirdQueueTrek);
+        fourQueueTrek.setBackground(new java.awt.Color(255, 255, 255));
+        fourQueueTrek.setColumns(20);
+        fourQueueTrek.setRows(5);
+        fourQueueTrek.setBorder(null);
+        jScrollPane7.setViewportView(fourQueueTrek);
 
-        cartoonNetworkPanel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 260, 50));
+        cartoonNetworkPanel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 260, 50));
 
         thirdQueueCartoon_label.setBackground(new java.awt.Color(0, 0, 0));
         thirdQueueCartoon_label.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         thirdQueueCartoon_label.setForeground(new java.awt.Color(51, 51, 51));
-        thirdQueueCartoon_label.setText("Terecera Prioridad");
-        cartoonNetworkPanel.add(thirdQueueCartoon_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 140, 30));
+        thirdQueueCartoon_label.setText("No listos");
+        cartoonNetworkPanel.add(thirdQueueCartoon_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 140, 30));
 
         winsCartoon_label.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
         winsCartoon_label.setForeground(new java.awt.Color(51, 51, 51));
@@ -430,7 +461,21 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
 
         result.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
         result.setForeground(new java.awt.Color(51, 51, 51));
-        cartoonNetworkPanel.add(result, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 150, 30));
+        cartoonNetworkPanel.add(result, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 200, 40));
+
+        thirdQueueCartoon_label1.setBackground(new java.awt.Color(0, 0, 0));
+        thirdQueueCartoon_label1.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        thirdQueueCartoon_label1.setForeground(new java.awt.Color(51, 51, 51));
+        thirdQueueCartoon_label1.setText("Tercera Prioridad");
+        cartoonNetworkPanel.add(thirdQueueCartoon_label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 140, 30));
+
+        thirdQueueTrek.setBackground(new java.awt.Color(255, 255, 255));
+        thirdQueueTrek.setColumns(20);
+        thirdQueueTrek.setRows(5);
+        thirdQueueTrek.setBorder(null);
+        jScrollPane9.setViewportView(thirdQueueTrek);
+
+        cartoonNetworkPanel.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 260, 50));
 
         generalPanel.add(cartoonNetworkPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 590, 670));
 
@@ -531,20 +576,6 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
 
         nickelodeonPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 260, 50));
 
-        thirdQueueNick_label.setBackground(new java.awt.Color(0, 0, 0));
-        thirdQueueNick_label.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        thirdQueueNick_label.setForeground(new java.awt.Color(255, 255, 255));
-        thirdQueueNick_label.setText("Terecera Prioridad");
-        nickelodeonPanel.add(thirdQueueNick_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 30));
-
-        thirdQueueWars.setBackground(new java.awt.Color(255, 255, 255));
-        thirdQueueWars.setColumns(20);
-        thirdQueueWars.setRows(5);
-        thirdQueueWars.setBorder(null);
-        jScrollPane3.setViewportView(thirdQueueWars);
-
-        nickelodeonPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 260, 50));
-
         winsNick_label.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
         winsNick_label.setForeground(new java.awt.Color(51, 51, 51));
         winsNick_label.setText("Vitorias");
@@ -574,6 +605,34 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
         AI_label.setForeground(new java.awt.Color(51, 51, 51));
         AI_label.setText("AI:");
         nickelodeonPanel.add(AI_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 40, 30));
+
+        thirdQueueNick_label1.setBackground(new java.awt.Color(0, 0, 0));
+        thirdQueueNick_label1.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        thirdQueueNick_label1.setForeground(new java.awt.Color(255, 255, 255));
+        thirdQueueNick_label1.setText("Tercera Prioridad");
+        nickelodeonPanel.add(thirdQueueNick_label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 30));
+
+        thirdQueueWars.setBackground(new java.awt.Color(255, 255, 255));
+        thirdQueueWars.setColumns(20);
+        thirdQueueWars.setRows(5);
+        thirdQueueWars.setBorder(null);
+        jScrollPane4.setViewportView(thirdQueueWars);
+
+        nickelodeonPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 260, 50));
+
+        thirdQueueNick_label2.setBackground(new java.awt.Color(0, 0, 0));
+        thirdQueueNick_label2.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        thirdQueueNick_label2.setForeground(new java.awt.Color(255, 255, 255));
+        thirdQueueNick_label2.setText("No listos");
+        nickelodeonPanel.add(thirdQueueNick_label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 140, 30));
+
+        fourQueueWars.setBackground(new java.awt.Color(255, 255, 255));
+        fourQueueWars.setColumns(20);
+        fourQueueWars.setRows(5);
+        fourQueueWars.setBorder(null);
+        jScrollPane8.setViewportView(fourQueueWars);
+
+        nickelodeonPanel.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 260, 50));
 
         generalPanel.add(nickelodeonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 670));
 
@@ -647,6 +706,8 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
     private javax.swing.JLabel chracterSTNick_Label;
     private javax.swing.JLabel chracterSTTrek;
     private javax.swing.JLabel chracterSTWars;
+    private javax.swing.JTextArea fourQueueTrek;
+    private javax.swing.JTextArea fourQueueWars;
     private javax.swing.JPanel generalPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -654,10 +715,12 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JFormattedTextField networkPanel_title;
     private javax.swing.JLabel nickWinner;
     private javax.swing.JPanel nickelodeonPanel;
@@ -674,7 +737,9 @@ public void setTopQueue(int n, ArrayList<Characters> a) {
     private javax.swing.JLabel speed_Label;
     private javax.swing.JLabel statusAI;
     private javax.swing.JLabel thirdQueueCartoon_label;
-    private javax.swing.JLabel thirdQueueNick_label;
+    private javax.swing.JLabel thirdQueueCartoon_label1;
+    private javax.swing.JLabel thirdQueueNick_label1;
+    private javax.swing.JLabel thirdQueueNick_label2;
     private javax.swing.JTextArea thirdQueueTrek;
     private javax.swing.JTextArea thirdQueueWars;
     private javax.swing.JLabel topQueueCartoon_label;

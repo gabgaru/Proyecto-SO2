@@ -63,12 +63,12 @@ public class SO {
     }
 
     public void StartRound() throws InterruptedException {
-        this.CPUPointer.setStatus("Eligiendo");
+        this.CPUPointer.setStatus("Espera");
         this.main.changeAIStatus(this.CPUPointer.getStatus());
-        //this.SOPointer.waitbro(numero desde la UI);
+        Thread.sleep((this.main.getSpeed() * 1000) / 3);
         Characters Fighter1 = null;
         Characters Fighter2 = null;
-        
+
         //Agregar nuevos jugadores para este ciclo
         if (this.Counter <= 0 && prob <= 80) {
             this.add1toQueue(new Characters(this.SWint + 1, true));
@@ -149,12 +149,17 @@ public class SO {
             }
         } else {
             //1 start wars 2 star trek
-            this.main.setSecondQueue(0, StarWarsQueue2);
             this.main.setTopQueue(0, StarWarsQueue1);
+            this.main.setSecondQueue(0, StarWarsQueue2);
             this.main.setThirdQueue(0, StarWarsQueue3);
-            this.main.setSecondQueue(1, StarTrekQueue2);
+            this.main.setFourQueue(0, StarWarsTrainingQueue);
+          
+
             this.main.setTopQueue(1, StarTrekQueue1);
+            this.main.setSecondQueue(1, StarTrekQueue2);
             this.main.setThirdQueue(1, StarTrekQueue3);
+            this.main.setFourQueue(1, StarTrekTrainingQueue);
+            printQueue1();
 
             if ((Fighter1.getSaga() && Fighter2.getSaga()) || (Fighter1.getSaga() == false && Fighter2.getSaga() == false)) {
                 System.out.println("ERROR, NO PUEDEN SER DE LO MISMOOO");
@@ -167,11 +172,11 @@ public class SO {
     public void SetCPUPointer(CPU pointer) {
         this.CPUPointer = pointer;
     }
-    
-    public void waitbro(int x) throws InterruptedException{
-        Thread.sleep(x);
+
+    public void waitbro() throws InterruptedException {
+        Thread.sleep(this.main.getSpeed() * 1000);
     }
-    
+
     public void updatePcounter() {
         for (int i = 0; i <= this.StarTrekQueue1.size(); i++) {
             Characters Actual = this.StarTrekQueue1.get(i);
@@ -252,8 +257,8 @@ public class SO {
     public void printQueue1() {
         System.out.println(this.StarWarsQueue1);
         System.out.println(this.StarTrekQueue1);
-        System.out.println("Tamano de SW: " + this.StarWarsQueue1.size());
-        System.out.println("Tamano de ST: " + this.StarTrekQueue1.size());
+        System.out.println("Tamano de SW: " + this.StarWarsTrainingQueue.size());
+        System.out.println("Tamano de ST: " + this.StarTrekTrainingQueue.size());
     }
 
     public Characters peek(int Queue, Boolean Saga) {

@@ -5,6 +5,7 @@
 package proyecto.pkg2.so;
 
 import javax.swing.JFrame;
+
 /**
  *
  * @author gabgaru
@@ -18,22 +19,23 @@ public class Proyecto2SO {
         //True StarWars
         //False StarTrek
         MainUI main = new MainUI();
+        musica reproductor = new musica("Musica/pokemon-battle.mp3");
+        reproductor.reproducir();
         main.setVisible(true);
-        SO TestSO= new SO();
-        CPU TestCPU=new CPU(TestSO);
+        SO TestSO = new SO();
+        CPU TestCPU = new CPU(TestSO);
         TestCPU.setMain(main);
         TestSO.SetCPUPointer(TestCPU);
 
-        for ( int i=0;i<21;i++){
-            TestSO.add1toQueue(new Characters(i,true));
+        for (int i = 0; i < 21; i++) {
+            TestSO.add1toQueue(new Characters(i, true));
         }
-        for ( int i=0;i<21;i++){
-            TestSO.add1toQueue(new Characters(i+21,false));
+        for (int i = 0; i < 21; i++) {
+            TestSO.add1toQueue(new Characters(i + 21, false));
         }
-       
+
         TestSO.setMain(main);
         TestSO.StartRound();
     }
-    
-}
 
+}

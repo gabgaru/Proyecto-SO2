@@ -37,24 +37,29 @@ public class CPU {
 //        System.out.println(prob);
 //        System.out.println(Fighter1);
 //        System.out.println(Fighter2);
-        setStatus("Decidiendo Resultado");
-        this.main.changeAIStatus(getStatus());
-        if (Fighter1.getSaga()) {
-            this.main.setNanmeStarWars(Fighter1);
-            this.main.setNanmeStarTrek(Fighter2);
-        } else {
-            this.main.setNanmeStarTrek(Fighter1);
-            this.main.setNanmeStarWars(Fighter2);
-        }
+
         //this.SOPointer.waitbro(numero desde la UI);
         if (Fighter1 != null && Fighter2 != null) {
+            if (Fighter1.getSaga()) {
+                this.main.setNanmeStarWars(Fighter1);
+                this.main.setNanmeStarTrek(Fighter2);
+            } else {
+                this.main.setNanmeStarTrek(Fighter1);
+                this.main.setNanmeStarWars(Fighter2);
+            }
+            setStatus("Decidiendo");
+            this.main.changeAIStatus(getStatus());
+            Thread.sleep((this.main.getSpeed() * 1000) / 3);
             if (27 < prob && prob <= 67) {
+                this.main.setRound();
                 //Ejecutar selector de ganador
                 this.win(Fighter1, Fighter2);
                 this.SOPointer.StartRound();
                 //System.out.println("Combate"+"\n");
             }
             if (prob <= 27) {
+                this.main.setRound();
+                this.main.setResult("Empate");
                 //Condicion de empate
                 //Se iran a la cola de nuevo, con prioridad 1
                 Fighter1.setPriority(1);
@@ -90,52 +95,58 @@ public class CPU {
     public void setMain(MainUI main) {
         this.main = main;
     }
-    
-    
-    private void win(Characters c1, Characters c2){
+
+    private void win(Characters c1, Characters c2) throws InterruptedException {
         //Variable del primero
-        boolean c1first=false;
-        Boolean saga=null;
-        Random rand= new Random();
+        boolean c1first = false;
+        Boolean saga = null;
+        Random rand = new Random();
         //Damage de c/u
-        int Dmgc1=c1.getStrength()+c1.getStrength()*(c1.getSkills()/100);
-        int Dmgc2=c2.getStrength()+c2.getStrength()*(c2.getSkills()/100);
-        
+        int Dmgc1 = c1.getStrength() + c1.getStrength() * (c1.getSkills() / 100);
+        int Dmgc2 = c2.getStrength() + c2.getStrength() * (c2.getSkills() / 100);
+
         //Decidir el primero
-        if (c1.getAgility()>c2.getAgility()){
-            c1first=true;
+        if (c1.getAgility() > c2.getAgility()) {
+            c1first = true;
         }
-        if (c1.getAgility()==c2.getAgility()){
-            c1first=rand.nextBoolean();
+        if (c1.getAgility() == c2.getAgility()) {
+            c1first = rand.nextBoolean();
         }
-        
+
         //Combate
-        while (true){
-            if(c1first){
-                c2.setHealth(c2.getHealth()-Dmgc1);
+        while (true) {
+            if (c1first) {
+                c2.setHealth(c2.getHealth() - Dmgc1);
                 //Muelto o no
-                if(c2.getHealth()<=0){
+                if (c2.getHealth() <= 0) {
                     this.Winners.add(c1);
-                    saga=c1.getSaga();
+                    saga = c1.getSaga();
                     break;
                 }
-            }else{
-                c1.setHealth(c1.getHealth()-Dmgc2);
+            } else {
+                c1.setHealth(c1.getHealth() - Dmgc2);
                 //Muelto o no
-                if(c1.getHealth()<=0){
-                    saga=c2.getSaga();
+                if (c1.getHealth() <= 0) {
+                    saga = c2.getSaga();
                     this.Winners.add(c2);
                     break;
                 }
             }
         }
-        if(saga){
+
+        if (saga) {
             main.setStarWars();
-        }else{
+            main.setResult("Star Wars gano");
+            
+        } else {
             main.setStarTrek();
-        }   
+            main.setResult("Star Trek gano");
+        }
+        setStatus("Anunciando");
+        this.main.changeAIStatus(getStatus());
+        Thread.sleep((this.main.getSpeed() * 1000) / 3);
     }
-    
+
     public String getStatus() {
         return status;
     }
